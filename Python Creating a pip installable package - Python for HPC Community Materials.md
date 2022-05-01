@@ -1,16 +1,8 @@
-> Note: This tutorial was created originally by Stephen Hudson and post at https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/. A few modifications have been made here during my learning process. 
+> Note: This tutorial was created originally by Stephen Hudson and post at https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/. Modifications have been made here during my learning process. 
 
-1.  [Introduction](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#introduction)
-2.  [What is pip?](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#what-is-pip)
-3.  [Creating a Python package](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#creating-a-python-package)
-4.  [Creating a source distribution](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#creating-a-source-distribution)
-5.  [Creating a wheel distribution](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#creating-a-wheel-distribution)
-6.  [Testing and Publishing package on PyPI](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#testing-and-publishing-package-on-pypi)
-7.  [Uploading to testpypi](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#uploading-to-testpypi)
-8.  [Uploading to PyPI](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#uploading-to-pypi)
-9.  [Downloading tarball without install](https://betterscientificsoftware.github.io/python-for-hpc/tutorials/python-pypi-packaging/#downloading-tarball-without-install)
+[TOC]
 
-## Introduction
+## 1. Introduction
 
 This is a quickstart guide to Python Packaging with a particular focus on the creation of a PyPI package, which will enable users to “pip install” the package. The document is broken down into sections so that readers may easily skips parts of the process they are already familiar with. All but the final section (Uploading to PyPI), can be undertaken as an exercise to understand Python packaging and test the process, without publishing a package on the formal PyPI distribution.
 
@@ -18,7 +10,7 @@ For a more detailed reference on package creation, see the official Python Packa
 
 Note: PyPI should be pronounced “pie P I” to avoid confusion with pypy (a Python implementation).
 
-## What is pip?
+## 2. What is pip?
 
 pip is a package management system, specifically designed for installing Python packages from from the internet hosted Python Package Index (commonly known as PyPI). It is the most common way to install Python packages. E.g.
 
@@ -54,7 +46,7 @@ Python 3.6.3 |Intel Corporation| (default, Oct 16 2017, 15:28:36) ....
 
 Installing pip is easy: [https://pip.pypa.io/en/stable/installing](https://pip.pypa.io/en/stable/installing)
 
-## Creating a Python package
+## 3. Creating a Python package
 
 This article gives an overview of how to create an installable Python package.
 
@@ -179,7 +171,7 @@ This does create the problem of having two places holding the version, which mus
 
 **If you wish to create sub-packages, these should ideally be directories inside the main package** (Re-mapping from other locations is possible using the package\_dir argument in setup but this can cause a [problem with develop installs](https://github.com/pypa/pip/issues/3160). The sub-packages also require an \_\_init\_\_.py in the directory.
 
-## Creating a source distribution
+## 4. Creating a source distribution
 
 It is recommended that all Python projects provide a source distribution. PyPI has certain required meta-data that the setup.py should provide. **To quickly check if your project has this data use:**
 
@@ -199,7 +191,7 @@ This creates a dist/ directory containing a compressed archive of the package (e
 
 Note: A `<PACKAGE_NAME>`.egg-info directory will also be created in your root directory containing meta-data about your distribution. This can safely be deleted if it is not wanted (despite the extension, this is generated even though you have not built an egg format package).
 
-## Creating a wheel distribution
+## 5. Creating a wheel distribution
 
 Optionally you may create a wheel distribution. This is a built distribution for the current platform. Wheels should be used in place of the older egg format. Bear in mind, any extensions will be built for the given platform and as such this must be consistent with any other project dependencies. Wheels will speed up installation if you have compiled code extensions as the build step is not required.
 
@@ -223,7 +215,7 @@ python setup.py bdist_wheel
 
 The installable wheel will be created under the dist/ directory. A build directory will also be created with the built code. Further details for building wheels can be found here: [https://packaging.python.org/tutorials/distributing-packages](https://packaging.python.org/tutorials/distributing-packages)
 
-## Testing and Publishing package on PyPI
+## 6. Testing and Publishing package on PyPI
 
 Distributing the package on PyPI will enable anyone on-line to pip install the package.
 
@@ -243,7 +235,7 @@ pip install twine
 
 IMPORTANT: First you can test your upload using the PyPI test site. It is highly recommended that you do this and test installing your package as below. NOTE: Once you upload a package to PYPI it is possible to remove it, but you cannot upload another package with the same version number – this breaks the version contract. It is therefore, especially prudent to test with testpypi first. Note that anything you put on testpypi should be considered disposable as the site regularly prunes content.
 
-### Uploading to testpypi
+### 6.1 Uploading to testpypi
 
 This section shows how to upload a source distribution of your package. Further documentation at: [https://packaging.python.org/guides/using-testpypi](https://packaging.python.org/guides/using-testpypi).
 
@@ -284,7 +276,7 @@ The package should now be uploaded to: [https://testpypi.python.org/pypi.](https
 pip install --index-url https://test.pypi.org/simple/ ppackexample --user
 ```
 
-### Uploading to PyPI
+### 6.2 Uploading to PyPI
 
 Once you are happy with the repository in testpyi, uploading to PYPI will be the same command line process, but without having to specify the url arguments. For example, the steps above would simply become:
 
@@ -310,7 +302,7 @@ pip install ppackexample --user
 
 > It is also recommended that you use virtual environments to test installing dependencies from scratch and for trying out different python versions. Check required flags to ensure your environment is isolated. E.g. For Virtualenv use the flag `--no-site-packages`. For Conda, set the environment variable `export PYTHONNOUSERSITE=1` before activating you environment. Packages that are explicitly linked through PYTHONPATH will still be found however.
 
-### Downloading tarball without install
+### 6.3 Downloading tarball without install
 
 To test downloading a source distribution (no install) with dependencies:
 
