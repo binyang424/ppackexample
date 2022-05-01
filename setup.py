@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ppackexample',
-    version='0.1.0',    
+    version='0.0.1',    
     description='A example Python package',
     url='https://github.com/shuds13/ppackexample',
     author='Bin Yang',
