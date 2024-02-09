@@ -1,16 +1,15 @@
 from setuptools import setup
 
 setup(
-    name='ppackexample',
+    name='template',
     version='0.0.1',    
     description='A example Python package',
     url='https://github.com/shuds13/ppackexample',
     author='Bin Yang',
     author_email='bin.yang@polymtl.ca',
     license='BSD 2-clause',
-    packages=['ppackexample'],
-    install_requires=['numpy>=0.5',
-                      'scipy',                     
+    packages=['src'],
+    install_requires=['numpy>=0.5',                   
                       ],
 
     classifiers=[

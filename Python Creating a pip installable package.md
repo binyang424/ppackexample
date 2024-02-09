@@ -72,13 +72,13 @@ pyexample
 
 At the root directory, you will need a `setup.py` file, which will govern the installation of your package. The setuptools package is recommended for this (the in-built distutils is an older alternative).
 
-```
+```shell
 pip install setuptools
 ```
 
 The main requirement in `setup.py ` is to call the setup routine, providing project information as keyword arguments. A lot of information can be provided, but the following is a minimalist example.
 
-```
+```python
 from setuptools import setup
 
 setup(
